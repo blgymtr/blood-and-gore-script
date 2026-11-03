@@ -152,7 +152,7 @@ class InstallUninstall(Base):
         self.install()
         p = os.path.join(self.proj, "States", "Humanoid.states")
         text = open(p, encoding="utf8").read()
-        orig = open(os.path.join(self.proj, "bloodgore_backup", os.listdir(os.path.join(self.proj, "bloodgore_backup"))[0], "files", "States", "Humanoid.states"), encoding="utf8").read()
+        orig = open(os.path.join(self.proj, "bloodgore_backup", [d for d in sorted(os.listdir(os.path.join(self.proj, "bloodgore_backup"))) if os.path.isdir(os.path.join(self.proj, "bloodgore_backup", d))][0], "files", "States", "Humanoid.states"), encoding="utf8").read()
         edited = text.replace("state DEAD NONE 0", "state DEAD NONE 0\nframe 12 0.5 0 0 0 NONE", 1)  # user adds a line (breaks the sha)
         edited = edited.replace("state IDLE NONE 0\n", "state IDLE NONE 0\n", 1)
         open(p, "w", encoding="utf8", newline="").write(edited)
